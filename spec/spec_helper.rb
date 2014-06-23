@@ -9,7 +9,7 @@ WebMock.disable_net_connect!(allow_localhost: true)
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
-    expectations.syntax = :expect
+    expectations.syntax = [:should, :expect]
   end
 
   # Run specs in random order to surface order dependencies. If you find an
@@ -19,16 +19,22 @@ RSpec.configure do |config|
   config.order = :random
 
   # DB Cleaner settings
+  config.before(:suite) do
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
   config.before(:each) do
     DatabaseCleaner.strategy = :transaction
   end
-  # Clean up all jobs specs with truncation
-  config.before(:each, async: true) do
+
+  config.before(:each, :js => true) do
     DatabaseCleaner.strategy = :truncation
   end
+
   config.before(:each) do
     DatabaseCleaner.start
   end
+
   config.after(:each) do
     DatabaseCleaner.clean
   end
