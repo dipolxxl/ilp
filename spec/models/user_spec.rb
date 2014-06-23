@@ -23,4 +23,9 @@ RSpec.describe User, type: :model do
       after { expect(subject).to be_valid }
     end
   end
+
+  context 'relations' do
+    it { expect(subject.txns).to eq [] }
+    it { expect(subject.txns.new).to be_kind_of(Txn) }
+  end
 end

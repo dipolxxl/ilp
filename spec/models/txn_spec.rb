@@ -24,4 +24,8 @@ RSpec.describe Txn, type: :model do
       after { expect(subject).to be_valid }
     end
   end
+
+  context 'relations' do
+    it { expect(subject.user).to be_kind_of(User) }
+  end
 end
