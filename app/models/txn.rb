@@ -1,4 +1,4 @@
-class User < ActiveRecord::Base
+class Txn < ActiveRecord::Base
 
   # ---------------------------------------------------------------------------
   # Callbacks.
@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   # Relations.
   # ---------------------------------------------------------------------------
 
-  has_many :txns, dependent: :destroy
+  belongs_to :user
 
   # ---------------------------------------------------------------------------
   # Scopes.
@@ -18,15 +18,9 @@ class User < ActiveRecord::Base
   # Validations.
   # ---------------------------------------------------------------------------
 
-  validates :name, :email, :balance, presence: true
-  validates :name, length: { maximum: 255 }
-  # simple email validation
-  # TODO: change regexp if its need
-  validates :email, format: /\A\S+@\S+\.\S+\z/
-  validates :balance, numericality: {
-                        only_integer: true,
-                        greater_than_or_equal_to: 0
-                      }
+  # accepted values: 1 || -1
+  validates :amount, format: /\A[+-]?1\Z/
+
   # ---------------------------------------------------------------------------
   # Class methods.
   # ---------------------------------------------------------------------------

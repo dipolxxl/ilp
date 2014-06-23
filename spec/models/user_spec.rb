@@ -15,7 +15,7 @@ RSpec.describe User, type: :model do
       after { expect(subject).to_not be_valid }
     end
 
-    context 'success' do
+    context 'successful' do
       it { subject.name = 'a'*5 }
       it { subject.email = 'valid@email.address' }
       it { subject.balance = 100 }
