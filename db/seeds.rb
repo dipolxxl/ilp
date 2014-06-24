@@ -10,9 +10,20 @@
 10.times do |i|
   i += 1
 
-  User.create(
+  User.find_or_create_by!(
     name: "User #{i}",
     email: "user#{i}@test.cc",
-    balance: i * Random.new.rand(10)
+    # balance: i * Random.new.rand(10)
   )
+end
+
+# Create 5 transactions for every user
+User.all.each do |user|
+  next if user.txns.size >= 5
+
+  (5 - user.txns.size).times do
+    user.txns.create(
+      amount: [1, -1].sample
+    )
+  end
 end
