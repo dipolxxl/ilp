@@ -21,7 +21,7 @@ class Txn < ActiveRecord::Base
   # ---------------------------------------------------------------------------
 
   # accepted values: 1 || -1
-  validates :amount, format: /\A[+-]?1\Z/
+  validates :amount, format: /\A[+-]?[1-9][0-9]*\Z/
 
   # ---------------------------------------------------------------------------
   # Class methods.

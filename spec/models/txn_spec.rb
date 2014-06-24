@@ -7,19 +7,13 @@ RSpec.describe Txn, type: :model do
     context 'failure' do
       it { subject.amount = 'a' }
       it { subject.amount = 0 }
-      it { subject.amount = -2 }
-      it { subject.amount = 2 }
-      it { subject.amount = '-2' }
-      it { subject.amount = '+2' }
 
       after { expect(subject).to_not be_valid }
     end
 
     context 'successful' do
-      it { subject.amount = -1 }
-      it { subject.amount = 1 }
-      it { subject.amount = '+1' }
-      it { subject.amount = '-1' }
+      it { subject.amount = -10 }
+      it { subject.amount = 100 }
 
       after { expect(subject).to be_valid }
     end
