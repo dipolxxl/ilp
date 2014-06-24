@@ -28,4 +28,14 @@ RSpec.describe Txn, type: :model do
   context 'relations' do
     it { expect(subject.user).to be_kind_of(User) }
   end
+
+  context 'scopes' do
+    let(:user_1) { create(:user) }
+    let(:user_2) { create(:user) }
+    let(:txn_1)  { create(:txn, user: user_1) }
+    let(:txn_2) { create(:txn, user: user_2) }
+    let(:txn_3) { create(:txn, user: user_1) }
+
+    it { expect(Txn.for_user(user_1)).to eq([txn_1, txn_3]) }
+  end
 end
