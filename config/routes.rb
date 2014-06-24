@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :users, only: :index
+  resources :users, only: :index do
+    resources :txns, only: %i(index create)
+  end
 
   root 'users#index'
 

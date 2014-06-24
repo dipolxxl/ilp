@@ -11,7 +11,7 @@ RSpec.describe UsersController, type: :controller do
       end
 
       it { expect(response).to be_success }
-      it { expect(response.body).to eq [].to_json }
+      it { expect(response.body).to eq({ users: [] }.to_json) }
     end
 
     context 'for filled DB' do
@@ -19,7 +19,11 @@ RSpec.describe UsersController, type: :controller do
       before { get :index }
 
       it { expect(response).to be_success }
-      it { expect(response.body).to eq [{name: 'Test user', balance: 0}].to_json }
+
+      it 'return users array (in json format)' do
+        expect(response.body)
+          .to eq({ users: [{name: 'Test user', balance: 0}] }.to_json)
+      end
     end
   end
 end
