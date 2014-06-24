@@ -10,7 +10,7 @@ RSpec.describe User, type: :model do
       it { subject.balance = nil }
       it { subject.name = 'a'*256 }
       it { subject.email = 'invalid@email' }
-      it { subject.balance = -1 }
+      it { subject.balance = 1.5 }
 
       after { expect(subject).to_not be_valid }
     end
@@ -19,6 +19,7 @@ RSpec.describe User, type: :model do
       it { subject.name = 'a'*5 }
       it { subject.email = 'valid@email.address' }
       it { subject.balance = 100 }
+      it { subject.balance = -10 }
 
       after { expect(subject).to be_valid }
     end
