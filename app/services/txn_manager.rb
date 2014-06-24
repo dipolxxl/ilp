@@ -9,8 +9,7 @@ class TxnManager
   def save
     Txn.transaction do
       txn.save!
-      user.balance = user.txns.sum(:amount)
-      user.save!
+      user.update(balance: user.txns.sum(:amount))
     end
 
     :created
